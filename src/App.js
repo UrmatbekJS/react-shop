@@ -46,6 +46,7 @@ class App extends React.Component {
         },
       ],
       showFullItem: false,
+      fullItem: {},
     };
     this.state.currentItems = this.state.items;
     this.addToOrder = this.addToOrder.bind(this);
@@ -64,13 +65,20 @@ class App extends React.Component {
           onAdd={this.addToOrder}
         />
 
-        {this.state.showFullItem && <ShowFullItem />}
+        {this.state.showFullItem && (
+          <ShowFullItem
+            onAdd={this.addToOrder}
+            onShowItem={this.onShowItem}
+            item={this.state.fullItem}
+          />
+        )}
         <Footer />
       </div>
     );
   }
 
-  onShowItem() {
+  onShowItem(item) {
+    this.setState({ fullItem: item });
     this.setState({ showFullItem: !this.state.showFullItem });
   }
 
